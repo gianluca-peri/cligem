@@ -12,9 +12,9 @@ also be sure to add the following lines to your `.bashrc` file:
 
 ```bash
 export YOUR_API_KEY
-export PATH=$PATH:/home/YOUR_USERNAME/go/bin
+export PATH="$PATH:$HOME/go/bin"
 ```
 
-where of course you must substitute `YOUR_API_KEY` and `YOUR_USERNAME` with the correct values. Right now you can get a google API key for free (up to a limit).
+where of course you must substitute `YOUR_API_KEY` with the correct value. Right now you can get a Google Gemini API key for free (up to a limit).
 
 After the setup you can simply run a chat by typing `cligem` in your terminal.
