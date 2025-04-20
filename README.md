@@ -11,7 +11,7 @@ go install github.com/gianluca-peri/cligem@latest
 also be sure to add the following lines to your `.bashrc` file:
 
 ```bash
-export YOUR_API_KEY
+export GEMINI_API_KEY=YOUR_API_KEY
 export PATH="$PATH:$HOME/go/bin"
 ```
 
