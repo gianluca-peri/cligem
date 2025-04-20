@@ -24,7 +24,7 @@ func main() {
 	var gemini_api_key = os.Getenv("GEMINI_API_KEY")
 
 	// Choose the model to use
-	var model_name string = "gemini-1.5-flash"
+	var model_name string = "gemini-2.0-flash"
 
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, option.WithAPIKey(gemini_api_key))
@@ -33,8 +33,11 @@ func main() {
 	}
 	defer client.Close()
 
+	// Create a new GenerativeModel instance and start a chat
 	model := client.GenerativeModel(model_name)
+	cs := model.StartChat()
 
+	// Set a reader to read user input
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Using model:", model_name)
@@ -54,8 +57,8 @@ func main() {
 			break
 		}
 
-		// Generate content (text) using the model
-		resp, err := model.GenerateContent(ctx, genai.Text(user_input))
+		// Send the user input to the model and get the response
+		resp, err := cs.SendMessage(ctx, genai.Text(user_input))
 		if err != nil {
 			log.Fatal("Failed to generate content (text):", err)
 		}
