@@ -26,6 +26,12 @@ func main() {
 	// Choose the model to use
 	var model_name string = "gemini-2.0-flash"
 
+	// Define colors for the model
+	var model_color = "\033[35m"
+
+	// Define my color
+	var my_color = "\033[36m"
+
 	ctx := context.Background()
 	client, err := genai.NewClient(ctx, option.WithAPIKey(gemini_api_key))
 	if err != nil {
@@ -41,7 +47,7 @@ func main() {
 	reader := bufio.NewReader(os.Stdin)
 
 	fmt.Println("Using model:", model_name)
-	fmt.Println("Please enter a string (or type 'quit' to quit):")
+	fmt.Println("Please enter a string (or type 'quit' to quit):", my_color)
 	for {
 		// Read user input
 		user_input, err := reader.ReadString('\n')
@@ -67,7 +73,8 @@ func main() {
 		for _, candidate := range resp.Candidates {
 			for _, part := range candidate.Content.Parts {
 				if text, ok := part.(genai.Text); ok {
-					fmt.Println(text)
+					fmt.Print(model_color)
+					fmt.Println(text, my_color)
 				}
 			}
 		}
