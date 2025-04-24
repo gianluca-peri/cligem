@@ -11,6 +11,8 @@ import (
 
 	"github.com/google/generative-ai-go/genai"
 	"google.golang.org/api/option"
+
+	"github.com/charmbracelet/glamour"
 )
 
 func main() {
@@ -25,9 +27,6 @@ func main() {
 
 	// Choose the model to use
 	var model_name string = "gemini-2.0-flash"
-
-	// Define colors for the model
-	var model_color = "\033[35m"
 
 	// Define my color
 	var my_color = "\033[36m"
@@ -73,8 +72,12 @@ func main() {
 		for _, candidate := range resp.Candidates {
 			for _, part := range candidate.Content.Parts {
 				if text, ok := part.(genai.Text); ok {
-					fmt.Print(model_color)
-					fmt.Println(text, my_color)
+					out, err := glamour.Render(string(text), "dark")
+					if err != nil {
+						log.Fatal("Failed to render content:", err)
+					}
+					fmt.Print(out)
+					fmt.Println(my_color)
 				}
 			}
 		}
