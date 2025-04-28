@@ -1,4 +1,4 @@
-# Cligem: A Command Line Interface for Google Gemini
+# Cligem: CLI for Google Gemini
 
 ## Key Features
 
